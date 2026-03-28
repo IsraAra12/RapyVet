@@ -1,0 +1,425 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogos y Servicios | RapyVet</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --morado-rapyvet: #7b3e8c;
+            --morado-claro: #9c54b0;
+            --fondo-principal: #f4f5f7;
+            --texto-principal: #2d3436;
+            --texto-secundario: #636e72;
+            --fondo-tarjeta: #ffffff;
+            --fondo-header: rgba(255, 255, 255, 0.85);
+            --borde-input: #e1e5ee;
+            --sombra-tarjeta: 0 4px 12px rgba(0,0,0,0.04);
+            --sombra-hover: 0 15px 30px rgba(123, 62, 140, 0.12);
+        }
+
+        [data-theme="dark"] {
+            --fondo-principal: #121212;
+            --texto-principal: #ffffff;
+            --texto-secundario: #a0aab2;
+            --fondo-tarjeta: #1e1e1e;
+            --fondo-header: rgba(18, 18, 18, 0.85);
+            --borde-input: #2d2d2d;
+            --sombra-tarjeta: 0 4px 12px rgba(0,0,0,0.4);
+            --sombra-hover: 0 15px 30px rgba(123, 62, 140, 0.3);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--fondo-principal);
+            color: var(--texto-principal);
+            margin: 0;
+            transition: background-color 0.4s ease, color 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Encabezado */
+        header {
+            background-color: var(--fondo-header);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 15px 20px;
+            border-bottom: 3px solid var(--morado-rapyvet);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+        }
+
+        .header-vacio { width: 40px; }
+        header img { max-width: 170px; height: auto; border-radius: 10px; transition: transform 0.3s; }
+        header img:hover { transform: scale(1.05) rotate(-1deg); }
+        
+        .theme-switch {
+            background: none; border: none; font-size: 26px; cursor: pointer; color: var(--texto-principal);
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+        .theme-switch:hover { transform: scale(1.15) rotate(10deg); filter: drop-shadow(0 0 8px rgba(123, 62, 140, 0.4)); }
+
+        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; flex: 1; }
+        
+        h1 { text-align: center; font-size: 2.4em; margin-bottom: 5px; font-weight: 700; letter-spacing: -0.5px; }
+        p.instrucciones { text-align: center; color: var(--texto-secundario); margin-bottom: 35px; font-size: 1.1em; }
+
+        /* Buscador */
+        .search-wrapper { max-width: 650px; margin: 0 auto 45px auto; position: relative; }
+        #buscador {
+            width: 100%; padding: 18px 20px 18px 55px; font-size: 16px; font-family: 'Poppins', sans-serif;
+            background-color: var(--fondo-tarjeta); color: var(--texto-principal); border: 2px solid transparent;
+            border-radius: 50px; outline: none; box-sizing: border-box; transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        [data-theme="dark"] #buscador { border: 1px solid var(--borde-input); }
+        #buscador:focus { border-color: var(--morado-rapyvet); box-shadow: 0 8px 25px rgba(123, 62, 140, 0.15); transform: translateY(-2px); }
+        .search-icon { position: absolute; left: 22px; top: 50%; transform: translateY(-50%); font-size: 22px; color: #a0aab2; transition: color 0.3s; }
+        #buscador:focus + .search-icon { color: var(--morado-rapyvet); }
+
+        /* Banner de Servicio */
+        .banner-servicio {
+            background: linear-gradient(135deg, var(--morado-rapyvet), #5c2075);
+            color: white; padding: 30px; border-radius: 20px; margin-bottom: 50px;
+            display: flex; flex-direction: column; align-items: center; text-align: center;
+            box-shadow: 0 10px 30px rgba(123, 62, 140, 0.25); gap: 20px; position: relative;
+            overflow: hidden; transition: transform 0.3s ease;
+        }
+        .banner-servicio:hover { transform: translateY(-3px); }
+        
+        @media (min-width: 768px) {
+            .banner-servicio { flex-direction: row; text-align: left; padding: 30px 40px; }
+        }
+
+        @keyframes snip { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-15deg) scale(1.1); } }
+        .banner-servicio .icono-servicio { font-size: 4em; line-height: 1; animation: snip 3s infinite ease-in-out; }
+        .banner-servicio h2 { margin: 0 0 10px 0; font-size: 1.7em; color: #ffffff; letter-spacing: -0.5px; }
+        .banner-servicio p { margin: 0; font-size: 1.1em; opacity: 0.9; line-height: 1.6; }
+
+        #sin-resultados {
+            text-align: center; padding: 40px 20px; color: var(--texto-secundario);
+            font-size: 1.2em; display: none; background-color: var(--fondo-tarjeta);
+            border-radius: 16px; border: 1px dashed var(--borde-input);
+        }
+
+        /* Tarjetas */
+        .grid-laboratorios { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+
+        .btn-pdf {
+            background-color: var(--fondo-tarjeta); color: var(--texto-principal); padding: 18px 22px;
+            border-radius: 18px; display: flex; align-items: center;
+            border: 1px solid var(--borde-input); box-shadow: var(--sombra-tarjeta); 
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer; position: relative; overflow: hidden;
+            opacity: 0; transform: translateY(20px);
+            user-select: none;
+        }
+        
+        .btn-pdf:hover { transform: translateY(-6px); box-shadow: var(--sombra-hover); border-color: var(--morado-rapyvet); }
+
+        @keyframes slideUpFade { to { opacity: 1; transform: translateY(0); } }
+
+        .logo-lab {
+            width: 55px; height: 55px; object-fit: contain; margin-right: 18px;
+            background-color: transparent; border-radius: 10px; padding: 4px; transition: transform 0.3s;
+        }
+        .btn-pdf:hover .logo-lab { transform: scale(1.1); }
+        [data-theme="dark"] .logo-lab { background-color: rgba(255, 255, 255, 0.95); }
+
+        .info-lab { display: flex; flex-direction: column; }
+        .nombre-lab { font-weight: 600; font-size: 1.15em; margin-bottom: 6px; }
+
+        .tag { font-size: 0.75em; font-weight: 600; padding: 4px 12px; border-radius: 20px; width: fit-content; text-transform: uppercase; letter-spacing: 0.5px; }
+        .tag.ac { background-color: #e3f2fd; color: #1565c0; }
+        .tag.ap { background-color: #e8f5e9; color: #2e7d32; }
+        .tag.gral { background-color: #f3e5f5; color: #8e24aa; }
+        [data-theme="dark"] .tag.ac { background-color: #1a237e; color: #90caf9; }
+        [data-theme="dark"] .tag.ap { background-color: #1b5e20; color: #a5d6a7; }
+        [data-theme="dark"] .tag.gral { background-color: #4a148c; color: #ce93d8; }
+
+        /* VISOR DE PDF PERSONALIZADO */
+        .pdf-modal {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background-color: var(--fondo-principal); z-index: 9999;
+            display: none; flex-direction: column;
+        }
+
+        .pdf-modal-header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 25px; background-color: var(--fondo-tarjeta);
+            border-bottom: 3px solid var(--morado-rapyvet);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .pdf-modal-header img { height: 40px; width: auto; }
+        .pdf-modal-titulo { font-weight: 600; font-size: 1.2em; color: var(--texto-principal); }
+
+        .btn-cerrar {
+            background-color: #ff4757; color: white; border: none;
+            padding: 8px 15px; font-size: 0.95em; font-weight: 600; font-family: 'Poppins', sans-serif;
+            border-radius: 8px; cursor: pointer; transition: background-color 0.2s;
+        }
+        .btn-cerrar:hover { background-color: #ff6b81; }
+
+        .pdf-iframe { flex-grow: 1; width: 100%; border: none; background-color: #e0e0e0; }
+
+        /* Footer */
+        footer {
+            background-color: var(--fondo-tarjeta); padding: 50px 20px; text-align: center;
+            border-top: 1px solid var(--borde-input); margin-top: 60px;
+        }
+        .contacto-info { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 25px; color: var(--texto-secundario); font-size: 1.05em; }
+        .contacto-info h3 { color: var(--texto-principal); margin-bottom: 5px; font-size: 1.8em; font-weight: 700; }
+
+        .whatsapp-container { display: flex; flex-direction: column; gap: 15px; margin: 15px 0; }
+        @media (min-width: 768px) { .whatsapp-container { flex-direction: row; justify-content: space-between; gap: 20px; } }
+
+        .whatsapp-item {
+            background-color: var(--fondo-principal); padding: 20px; border-radius: 16px; flex: 1;
+            display: flex; flex-direction: column; align-items: center; gap: 8px;
+            transition: transform 0.3s, box-shadow 0.3s; border: 1px solid transparent;
+        }
+        .whatsapp-item:hover { transform: translateY(-5px); box-shadow: var(--sombra-tarjeta); border-color: rgba(123, 62, 140, 0.2); }
+        .whatsapp-item span { font-size: 0.9em; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; opacity: 0.8; }
+
+        .contacto-link { color: var(--morado-rapyvet); text-decoration: none; font-weight: 700; font-size: 1.2em; display: flex; align-items: center; gap: 8px; transition: color 0.2s; }
+        .contacto-link:hover { color: var(--morado-claro); }
+        [data-theme="dark"] .contacto-link { color: #ce93d8; }
+        [data-theme="dark"] header img { filter: invert(1) brightness(2); }
+        [data-theme="dark"] .contacto-link:hover { color: #f3e5f5; }
+        .correo-ubicacion { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; font-weight: 500; }
+
+        /* --- OPTIMIZACIÓN PARA MÓVILES --- */
+        @media (max-width: 600px) {
+            header { padding: 12px 15px; }
+            header img { max-width: 130px; }
+            .theme-switch { font-size: 22px; }
+
+            h1 { font-size: 1.8em; margin-top: 10px; }
+            p.instrucciones { font-size: 0.95em; margin-bottom: 25px; }
+            #buscador { padding: 14px 15px 14px 45px; font-size: 14px; }
+            .search-icon { left: 15px; font-size: 18px; }
+
+            .grid-laboratorios { grid-template-columns: 1fr; gap: 15px; }
+
+            .pdf-modal-header {
+                flex-direction: column;
+                gap: 12px;
+                padding: 15px;
+                text-align: center;
+            }
+            .pdf-modal-header div {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="pdf-modal" id="visor-pdf">
+        <div class="pdf-modal-header">
+            <img src="logo_rapyvet.png" alt="Logo RapyVet Mini">
+            <span class="pdf-modal-titulo" id="titulo-laboratorio">Cargando catálogo...</span>
+            <div style="display: flex; gap: 10px;">
+                <a id="btn-externo-pdf" href="#" target="_blank" style="background-color: var(--morado-rapyvet); color: white; border: none; padding: 8px 15px; font-size: 0.9em; font-weight: 600; font-family: 'Poppins', sans-serif; border-radius: 8px; text-decoration: none; display: flex; align-items: center;">Abrir externo</a>
+                <button class="btn-cerrar" onclick="cerrarVisor()">✖ Cerrar</button>
+            </div>
+        </div>
+        <iframe class="pdf-iframe" id="frame-pdf" src=""></iframe>
+    </div>
+
+    <header>
+        <div class="header-vacio"></div>
+        <img src="logo_rapyvet.png" alt="Logo RapyVet">
+        <button class="theme-switch" id="theme-toggle" title="Cambiar a Modo Oscuro">🌙</button>
+    </header>
+
+    <div class="container">
+        <h1>Precios 2026</h1>
+        <p class="instrucciones">Encuentra y descarga las listas de precios actualizadas.</p>
+
+        <div class="search-wrapper">
+            <input type="text" id="buscador" onkeyup="filtrarLabs()" placeholder="Buscar laboratorio o línea (ej. 'Biozoo' o 'Producción')...">
+            <span class="search-icon">🔍</span>
+        </div>
+
+        <div class="banner-servicio">
+            <div class="icono-servicio">✂️</div>
+            <div>
+                <h2>¿Tus herramientas ya no cortan igual?</h2>
+                <p>En RapyVet también ofrecemos el servicio profesional de <strong>afilado de tijeras y cuchillas</strong> para estéticas veterinarias y Pet Grooming. ¡Déjalas como nuevas!</p>
+            </div>
+        </div>
+
+        <div id="sin-resultados">
+            <p>😕 No encontramos ningún catálogo que coincida con tu búsqueda.</p>
+        </div>
+
+        <div class="grid-laboratorios" id="lista-botones"></div>
+    </div>
+
+    <footer>
+        <div class="contacto-info">
+            <h3>Contacto RapyVet</h3>
+            
+            <div class="whatsapp-container">
+                <div class="whatsapp-item">
+                    <span>📱 Israel Araguz</span>
+                    <a href="https://api.whatsapp.com/send/?phone=5218136341222&text&type=phone_number&app_absent=0" target="_blank" class="contacto-link">81 3634 1222</a>
+                </div>
+                <div class="whatsapp-item">
+                    <span>🏢 Oficina</span>
+                    <a href="https://api.whatsapp.com/send/?phone=5218136346373&text&type=phone_number&app_absent=0" target="_blank" class="contacto-link">81 3634 6373</a>
+                </div>
+                <div class="whatsapp-item">
+                    <span>🛒 Ventas</span>
+                    <a href="https://api.whatsapp.com/send/?phone=5218130915651&text&type=phone_number&app_absent=0" target="_blank" class="contacto-link">81 3091 5651</a>
+                </div>
+            </div>
+
+            <div class="correo-ubicacion">
+                <p>✉️ <a href="mailto:rapyvet@gmail.com" class="contacto-link" style="display:inline; font-size: 1em;">rapyvet@gmail.com</a></p>
+                <p>📍 Guadalupe, Nuevo León, México</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const catalogos = [
+            { archivo: "Aranda Lista.pdf", nombre: "Aranda", linea: "gral", textoLinea: "General", imagen: "logos_lab/aranda.png" },
+            { archivo: "Biozoo AC 2026 PP.pdf", nombre: "Biozoo", linea: "ac", textoLinea: "Animales de Compañía", imagen: "logos_lab/biozoo.png" },
+            { archivo: "Biozoo AP 2026 PP.pdf", nombre: "Biozoo", linea: "ap", textoLinea: "Producción", imagen: "logos_lab/biozoo.png" },
+            { archivo: "Boehringer PP Pmvz Feb 2026.pdf", nombre: "Boehringer", linea: "gral", textoLinea: "General", imagen: "logos_lab/Boehringer.png" },
+            { archivo: "Chinoin lista.pdf", nombre: "Chinoin", linea: "gral", textoLinea: "General", imagen: "logos_lab/chinoin.png" },
+            { archivo: "Dechra PP 2026.pdf", nombre: "Dechra", linea: "gral", textoLinea: "General", imagen: "logos_lab/dechra.png" },
+            { archivo: "Elanco PP PMVZ LAB 2026.pdf", nombre: "Elanco", linea: "gral", textoLinea: "General", imagen: "logos_lab/Elanco.png" },
+            { archivo: "Holland PP Feb 2026.pdf", nombre: "Holland", linea: "gral", textoLinea: "General", imagen: "logos_lab/holland.png" },
+            { archivo: "Innopharma Febrero 2026 PP Pmvz.pdf", nombre: "Innopharma", linea: "gral", textoLinea: "General", imagen: "logos_lab/innopharma.png" },
+            { archivo: "L.P. HALVET 2025.pdf", nombre: "Halvet", linea: "gral", textoLinea: "General", imagen: "logos_lab/halvet.png" },
+            { archivo: "L.P. KIRON 2026.pdf", nombre: "Kiron", linea: "gral", textoLinea: "General", imagen: "logos_lab/kiron.png" },
+            { archivo: "L.P. PETS PHARMA 2026.pdf", nombre: "Pets Pharma", linea: "gral", textoLinea: "General", imagen: "logos_lab/pets.png" },
+            { archivo: "L.P. TORNEL 2025.pdf", nombre: "Tornel", linea: "gral", textoLinea: "General", imagen: "logos_lab/tornel.png" },
+            { archivo: "L.P. ZURICHVET 2025.pdf", nombre: "Zurichvet", linea: "gral", textoLinea: "General", imagen: "logos_lab/ZurichVet.png" },
+            { archivo: "Labyes PP Pmvz 2026.pdf", nombre: "Labyes", linea: "gral", textoLinea: "General", imagen: "logos_lab/labyes.png" },
+            { archivo: "Lapisa AC 2026 MVZ-FEB.pdf", nombre: "Lapisa", linea: "ac", textoLinea: "Animales de Compañía", imagen: "logos_lab/lapisa.png" },
+            { archivo: "Lista de Precios 2026  IINPET.pdf", nombre: "Iinpet", linea: "gral", textoLinea: "General", imagen: "logos_lab/iinpet.png" },
+            { archivo: "Mederilab PP 2025 Nov.pdf", nombre: "Mederilab", linea: "gral", textoLinea: "General", imagen: "logos_lab/mederilab.png" },
+            { archivo: "MUNVET PRECIOS AD 2025 RAPYVET.pdf", nombre: "Munvet", linea: "gral", textoLinea: "General", imagen: "logos_lab/munvet.png" },
+            { archivo: "Pisa Anco Feb 2026 PP PFarmacia.pdf", nombre: "Pisa", linea: "gral", textoLinea: "General", imagen: "logos_lab/pisa.png" },
+            { archivo: "Precios MSD 2026.pdf", nombre: "MSD", linea: "gral", textoLinea: "General", imagen: "logos_lab/MSD.png" },
+            { archivo: "Santgar PP Pmvz Marzo 2026.pdf", nombre: "Santgar", linea: "gral", textoLinea: "General", imagen: "logos_lab/Santgar.png" },
+            { archivo: "Vetoquinol AC Feb 2026 PP Pmvz.pdf", nombre: "Vetoquinol", linea: "ac", textoLinea: "Animales de Compañía", imagen: "logos_lab/veto.png" },
+            { archivo: "Vetoquinol Produccion 2026.pdf", nombre: "Vetoquinol", linea: "ap", textoLinea: "Producción", imagen: "logos_lab/veto.png" },
+            { archivo: "Virbac AC Marzo 2026.pdf", nombre: "Virbac", linea: "ac", textoLinea: "Animales de Compañía", imagen: "logos_lab/virbac.png" },
+            { archivo: "Zoetis AC Feb 2026.pdf", nombre: "Zoetis", linea: "ac", textoLinea: "Animales de Compañía", imagen: "logos_lab/zoetis.png" },
+            { archivo: "PRECIOS INSUMOS 2026.pdf", nombre: "Insumos", linea: "ac", textoLinea: "General", imagen: "logos_lab/logo_rapyvet.png" }
+        ];
+
+        function cargarBotones() {
+            const contenedor = document.getElementById('lista-botones');
+            contenedor.innerHTML = ''; 
+
+            catalogos.forEach((cat, index) => {
+                const tarjeta = document.createElement('div');
+                tarjeta.className = "btn-pdf";
+                tarjeta.style.animation = `slideUpFade 0.5s ease forwards ${index * 0.05}s`;
+                
+                tarjeta.onclick = function() {
+                    abrirVisor(`listas_pdf/${cat.archivo}`, cat.nombre, cat.textoLinea);
+                };
+
+                tarjeta.innerHTML = `
+                    <img src="${cat.imagen}" class="logo-lab" alt="Logo ${cat.nombre}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'50\\' height=\\'50\\'><rect width=\\'50\\' height=\\'50\\' fill=\\'%23eee\\'/><text x=\\'50%\\' y=\\'50%\\' dominant-baseline=\\'middle\\' text-anchor=\\'middle\\' font-family=\\'sans-serif\\' font-size=\\'12\\' fill=\\'%23999\\'>No Image</text></svg>';">
+                    <div class="info-lab">
+                        <span class="nombre-lab">${cat.nombre}</span>
+                        <span class="tag ${cat.linea}">${cat.textoLinea}</span>
+                    </div>
+                `;
+                
+                contenedor.appendChild(tarjeta);
+            });
+        }
+
+        /* --- SOLUCIÓN DE PDFs PARA MÓVILES --- */
+        function esMovil() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
+        }
+
+        function abrirVisor(rutaPdf, nombreLab, lineaLab) {
+            const rutaSegura = encodeURI(rutaPdf);
+
+            if (esMovil()) {
+                window.open(rutaSegura, '_blank');
+            } else {
+                const modal = document.getElementById('visor-pdf');
+                const iframe = document.getElementById('frame-pdf');
+                const titulo = document.getElementById('titulo-laboratorio');
+                const btnExterno = document.getElementById('btn-externo-pdf');
+
+                titulo.innerText = `${nombreLab} - Línea ${lineaLab}`;
+                iframe.src = rutaSegura;
+                btnExterno.href = rutaSegura;
+
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function cerrarVisor() {
+            const modal = document.getElementById('visor-pdf');
+            const iframe = document.getElementById('frame-pdf');
+
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            iframe.src = ''; 
+        }
+
+        function filtrarLabs() {
+            let input = document.getElementById('buscador').value.toLowerCase();
+            let botones = document.querySelectorAll('.btn-pdf');
+            let visibles = 0;
+            
+            botones.forEach(function(boton) {
+                let textoBoton = boton.textContent.toLowerCase();
+                if (textoBoton.includes(input)) {
+                    boton.style.display = "flex";
+                    visibles++;
+                } else {
+                    boton.style.display = "none";
+                }
+            });
+
+            document.getElementById('sin-resultados').style.display = (visibles === 0) ? 'block' : 'none';
+        }
+
+        const themeToggle = document.getElementById('theme-toggle');
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.body.setAttribute('data-theme', 'dark');
+            themeToggle.textContent = '☀️';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            if (document.body.getAttribute('data-theme') === 'dark') {
+                document.body.removeAttribute('data-theme');
+                themeToggle.textContent = '🌙';
+            } else {
+                document.body.setAttribute('data-theme', 'dark');
+                themeToggle.textContent = '☀️';
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', cargarBotones);
+    </script>
+</body>
+</html>
