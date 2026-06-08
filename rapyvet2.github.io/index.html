@@ -345,89 +345,86 @@
 			};
 
 			tarjeta.innerHTML = `
-			<img src="${cat.imagen}" class="logo-lab" alt="Logo ${cat.nombre}" onerror="this.src='data:image/svg+xml;utf8,"<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'50\\' height=\\'50\\'>
-				<rect width=\\'50\\' height=\\'50\\' fill=\\'%23eee\\'/>
-				<text x=\\'50%\\' y=\\'50%\\' dominant-baseline=\\'middle\\' text-anchor=\\'middle\\' font-family=\\'sans-serif\\' font-size=\\'12\\' fill=\\'%23999\\'>No Image</text>
-			</svg>';">
-			<div class="info-lab">
-				<span class="nombre-lab">${cat.nombre}</span>
-				<span class="tag ${cat.linea}">${cat.textoLinea}</span>
-			</div>
-			`;
+			<img src="${cat.imagen}" class="logo-lab" alt="Logo ${cat.nombre}">
+				<div class="info-lab">
+					<span class="nombre-lab">${cat.nombre}</span>
+					<span class="tag ${cat.linea}">${cat.textoLinea}</span>
+				</div>
+				`;
 
-			contenedor.appendChild(tarjeta);
-			});
-			}
+				contenedor.appendChild(tarjeta);
+				});
+				}
 
-			/* --- SOLUCIÓN DE PDFs PARA MÓVILES --- */
-			function esMovil() {
-			return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
-			}
+				/* --- SOLUCIÓN DE PDFs PARA MÓVILES --- */
+				function esMovil() {
+				return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
+				}
 
-			function abrirVisor(rutaPdf, nombreLab, lineaLab) {
-			const rutaSegura = encodeURI(rutaPdf);
+				function abrirVisor(rutaPdf, nombreLab, lineaLab) {
+				const rutaSegura = encodeURI(rutaPdf);
 
-			if (esMovil()) {
-			window.open(rutaSegura, '_blank');
-			} else {
-			const modal = document.getElementById('visor-pdf');
-			const iframe = document.getElementById('frame-pdf');
-			const titulo = document.getElementById('titulo-laboratorio');
-			const btnExterno = document.getElementById('btn-externo-pdf');
+				if (esMovil()) {
+				window.open(rutaSegura, '_blank');
+				} else {
+				const modal = document.getElementById('visor-pdf');
+				const iframe = document.getElementById('frame-pdf');
+				const titulo = document.getElementById('titulo-laboratorio');
+				const btnExterno = document.getElementById('btn-externo-pdf');
 
-			titulo.innerText = `${nombreLab} - Línea ${lineaLab}`;
-			iframe.src = rutaSegura;
-			btnExterno.href = rutaSegura;
+				titulo.innerText = `${nombreLab} - Línea ${lineaLab}`;
+				iframe.src = rutaSegura;
+				btnExterno.href = rutaSegura;
 
-			modal.style.display = 'flex';
-			document.body.style.overflow = 'hidden';
-			}
-			}
+				modal.style.display = 'flex';
+				document.body.style.overflow = 'hidden';
+				}
+				}
 
-			function cerrarVisor() {
-			const modal = document.getElementById('visor-pdf');
-			const iframe = document.getElementById('frame-pdf');
+				function cerrarVisor() {
+				const modal = document.getElementById('visor-pdf');
+				const iframe = document.getElementById('frame-pdf');
 
-			modal.style.display = 'none';
-			document.body.style.overflow = 'auto';
-			iframe.src = '';
-			}
+				modal.style.display = 'none';
+				document.body.style.overflow = 'auto';
+				iframe.src = '';
+				}
 
-			function filtrarLabs() {
-			let input = document.getElementById('buscador').value.toLowerCase();
-			let botones = document.querySelectorAll('.btn-pdf');
-			let visibles = 0;
+				function filtrarLabs() {
+				let input = document.getElementById('buscador').value.toLowerCase();
+				let botones = document.querySelectorAll('.btn-pdf');
+				let visibles = 0;
 
-			botones.forEach(function(boton) {
-			let textoBoton = boton.textContent.toLowerCase();
-			if (textoBoton.includes(input)) {
-			boton.style.display = "flex";
-			visibles++;
-			} else {
-			boton.style.display = "none";
-			}
-			});
+				botones.forEach(function(boton) {
+				let textoBoton = boton.textContent.toLowerCase();
+				if (textoBoton.includes(input)) {
+				boton.style.display = "flex";
+				visibles++;
+				} else {
+				boton.style.display = "none";
+				}
+				});
 
-			document.getElementById('sin-resultados').style.display = (visibles === 0) ? 'block' : 'none';
-			}
+				document.getElementById('sin-resultados').style.display = (visibles === 0) ? 'block' : 'none';
+				}
 
-			const themeToggle = document.getElementById('theme-toggle');
-			if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-			document.body.setAttribute('data-theme', 'dark');
-			themeToggle.textContent = '☀️';
-			}
+				const themeToggle = document.getElementById('theme-toggle');
+				if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				document.body.setAttribute('data-theme', 'dark');
+				themeToggle.textContent = '☀️';
+				}
 
-			themeToggle.addEventListener('click', () => {
-			if (document.body.getAttribute('data-theme') === 'dark') {
-			document.body.removeAttribute('data-theme');
-			themeToggle.textContent = '🌙';
-			} else {
-			document.body.setAttribute('data-theme', 'dark');
-			themeToggle.textContent = '☀️';
-			}
-			});
+				themeToggle.addEventListener('click', () => {
+				if (document.body.getAttribute('data-theme') === 'dark') {
+				document.body.removeAttribute('data-theme');
+				themeToggle.textContent = '🌙';
+				} else {
+				document.body.setAttribute('data-theme', 'dark');
+				themeToggle.textContent = '☀️';
+				}
+				});
 
-			document.addEventListener('DOMContentLoaded', cargarBotones);
-		</script>
+				document.addEventListener('DOMContentLoaded', cargarBotones);
+			</script>
 	</body>
 </html>
