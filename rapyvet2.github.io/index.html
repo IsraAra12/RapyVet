@@ -87,13 +87,30 @@
 						.search-icon { position: absolute; left: 22px; top: 50%; transform: translateY(-50%); font-size: 22px; color: #a0aab2; transition: color 0.3s; }
 						#buscador:focus + .search-icon { color: var(--morado-rapyvet); }
 
-						/* Banner de Servicio */
+						/* Banner de Servicio Animado */
+						.banner-wrapper {
+						position: relative;
+						overflow: hidden;
+						transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+						max-height: 400px; /* Altura máxima suficiente para el banner */
+						opacity: 1;
+						margin-bottom: 50px;
+						}
+
+						/* Cuando se agrega esta clase al hacer scroll hacia abajo */
+						.banner-wrapper.oculto {
+						max-height: 0;
+						opacity: 0;
+						margin-bottom: 0;
+						pointer-events: none; /* Evita interacciones mientras está oculto */
+						}
+
 						.banner-servicio {
 						background: linear-gradient(135deg, var(--morado-rapyvet), #5c2075);
-						color: white; padding: 30px; border-radius: 20px; margin-bottom: 50px;
+						color: white; padding: 30px; border-radius: 20px;
 						display: flex; flex-direction: column; align-items: center; text-align: center;
-						box-shadow: 0 10px 30px rgba(123, 62, 140, 0.25); gap: 20px; position: relative;
-						overflow: hidden; transition: transform 0.3s ease;
+						box-shadow: 0 10px 30px rgba(123, 62, 140, 0.25); gap: 20px;
+						transition: transform 0.3s ease;
 						}
 						.banner-servicio:hover { transform: translateY(-3px); }
 
@@ -254,13 +271,15 @@
 					<span class="search-icon">🔍</span>
 				</div>
 
-			<div class="banner-servicio">
-				<div class="icono-servicio">✂️</div>
-				<div>
-					<h2>¿Tus herramientas ya no cortan igual?</h2>
-					<p>
-						En RapyVet también ofrecemos el servicio profesional de <strong>afilado de tijeras y cuchillas</strong> para estéticas veterinarias y Pet Grooming. ¡Déjalas como nuevas!
-					</p>
+			<div class="banner-wrapper" id="mi-banner">
+				<div class="banner-servicio">
+					<div class="icono-servicio">✂️</div>
+					<div>
+						<h2>¿Tus herramientas ya no cortan igual?</h2>
+						<p>
+							En RapyVet también ofrecemos el servicio profesional de <strong>afilado de tijeras y cuchillas</strong> para estéticas veterinarias y Pet Grooming. ¡Déjalas como nuevas!
+						</p>
+					</div>
 				</div>
 			</div>
 
@@ -422,6 +441,24 @@
 				document.body.setAttribute('data-theme', 'dark');
 				themeToggle.textContent = '☀️';
 				}
+				});
+
+				/* --- SCRIPT PARA EL SCROLL DEL BANNER --- */
+				let lastScrollTop = 0;
+				const banner = document.getElementById('mi-banner');
+
+				window.addEventListener('scroll', function() {
+				let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+				// Si scrolleamos hacia abajo y pasamos de los primeros 100px
+				if (scrollTop > lastScrollTop && scrollTop > 100) {
+				banner.classList.add('oculto');
+				}
+				// Si scrolleamos hacia arriba
+				else {
+				banner.classList.remove('oculto');
+				}
+				lastScrollTop = scrollTop;
 				});
 
 				document.addEventListener('DOMContentLoaded', cargarBotones);
