@@ -87,35 +87,53 @@
 						.search-icon { position: absolute; left: 22px; top: 50%; transform: translateY(-50%); font-size: 22px; color: #a0aab2; transition: color 0.3s; }
 						#buscador:focus + .search-icon { color: var(--morado-rapyvet); }
 
-						/* Banner de Servicio Animado */
-						.banner-wrapper {
-						position: relative;
-						overflow: hidden;
-						transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-						max-height: 400px; /* Altura máxima suficiente para el banner */
-						opacity: 1;
-						margin-bottom: 50px;
-						}
-
-						/* Cuando se agrega esta clase al hacer scroll hacia abajo */
-						.banner-wrapper.oculto {
-						max-height: 0;
-						opacity: 0;
-						margin-bottom: 0;
-						pointer-events: none; /* Evita interacciones mientras está oculto */
-						}
+						/* Banner de Servicio */
+						.banner-wrapper { margin-bottom: 50px; }
 
 						.banner-servicio {
 						background: linear-gradient(135deg, var(--morado-rapyvet), #5c2075);
 						color: white; padding: 30px; border-radius: 20px;
 						display: flex; flex-direction: column; align-items: center; text-align: center;
-						box-shadow: 0 10px 30px rgba(123, 62, 140, 0.25); gap: 20px;
+						box-shadow: 0 10px 30px rgba(123, 62, 140, 0.25); gap: 20px; position: relative;
 						transition: transform 0.3s ease;
 						}
 						.banner-servicio:hover { transform: translateY(-3px); }
 
+						/* Botón cerrar banner ("X") */
+						.btn-cerrar-banner {
+						position: absolute;
+						top: 15px;
+						right: 15px;
+						background: rgba(0, 0, 0, 0.15);
+						border: none;
+						color: white;
+						width: 32px;
+						height: 32px;
+						border-radius: 50%;
+						font-size: 14px;
+						cursor: pointer;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						transition: background-color 0.3s;
+						}
+						.btn-cerrar-banner:hover { background: rgba(0, 0, 0, 0.4); }
+
+						/* Estilos de la tarjeta mini de afilado (cuando se cierra el banner) */
+						.tarjeta-afilado-mini {
+						background: linear-gradient(135deg, var(--morado-rapyvet), #5c2075);
+						color: white !important;
+						border: none;
+						max-width: 300px; /* Para que parezca una tarjeta más */
+						margin: 0 auto 50px auto;
+						opacity: 1 !important; /* Para que no la afecte la animación del JS */
+						transform: translateY(0) !important;
+						}
+						.tarjeta-afilado-mini:hover { box-shadow: 0 10px 25px rgba(123, 62, 140, 0.3); }
+						.icono-mini { font-size: 2.2em; margin-right: 15px; animation: snip 3s infinite ease-in-out; }
+
 						@media (min-width: 768px) {
-						.banner-servicio { flex-direction: row; text-align: left; padding: 30px 40px; }
+						.banner-servicio { flex-direction: row; text-align: left; padding: 30px 40px; padding-right: 60px; }
 						}
 
 						@keyframes snip { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-15deg) scale(1.1); } }
@@ -271,14 +289,27 @@
 					<span class="search-icon">🔍</span>
 				</div>
 
-			<div class="banner-wrapper" id="mi-banner">
+			<!-- Banner Principal Expandido -->
+			<div class="banner-wrapper" id="banner-expandido">
 				<div class="banner-servicio">
+					<button class="btn-cerrar-banner" onclick="contraerBanner()" title="Ocultar anuncio">✖</button>
 					<div class="icono-servicio">✂️</div>
 					<div>
 						<h2>¿Tus herramientas ya no cortan igual?</h2>
 						<p>
 							En RapyVet también ofrecemos el servicio profesional de <strong>afilado de tijeras y cuchillas</strong> para estéticas veterinarias y Pet Grooming. ¡Déjalas como nuevas!
 						</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- Tarjeta de Afilado Contraída (aparece oculta por defecto) -->
+			<div id="banner-contraido" style="display: none;">
+				<div class="btn-pdf tarjeta-afilado-mini" onclick="expandirBanner()">
+					<div class="icono-mini">✂️</div>
+					<div class="info-lab">
+						<span class="nombre-lab" style="margin-bottom: 0;">Servicio de Afilado</span>
+						<span style="font-size: 0.85em; opacity: 0.9; font-weight: 500;">Toca para expandir info</span>
 					</div>
 				</div>
 			</div>
@@ -375,6 +406,17 @@
 				});
 				}
 
+				/* --- FUNCIONES DEL BANNER --- */
+				function contraerBanner() {
+				document.getElementById('banner-expandido').style.display = 'none';
+				document.getElementById('banner-contraido').style.display = 'block';
+				}
+
+				function expandirBanner() {
+				document.getElementById('banner-contraido').style.display = 'none';
+				document.getElementById('banner-expandido').style.display = 'block';
+				}
+
 				/* --- SOLUCIÓN DE PDFs PARA MÓVILES --- */
 				function esMovil() {
 				return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
@@ -414,13 +456,16 @@
 				let botones = document.querySelectorAll('.btn-pdf');
 				let visibles = 0;
 
+				// Filtra solo los catálogos, ignorando la tarjeta mini del banner
 				botones.forEach(function(boton) {
+				if (!boton.classList.contains('tarjeta-afilado-mini')) {
 				let textoBoton = boton.textContent.toLowerCase();
 				if (textoBoton.includes(input)) {
 				boton.style.display = "flex";
 				visibles++;
 				} else {
 				boton.style.display = "none";
+				}
 				}
 				});
 
@@ -441,24 +486,6 @@
 				document.body.setAttribute('data-theme', 'dark');
 				themeToggle.textContent = '☀️';
 				}
-				});
-
-				/* --- SCRIPT PARA EL SCROLL DEL BANNER --- */
-				let lastScrollTop = 0;
-				const banner = document.getElementById('mi-banner');
-
-				window.addEventListener('scroll', function() {
-				let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-				// Si scrolleamos hacia abajo y pasamos de los primeros 100px
-				if (scrollTop > lastScrollTop && scrollTop > 100) {
-				banner.classList.add('oculto');
-				}
-				// Si scrolleamos hacia arriba
-				else {
-				banner.classList.remove('oculto');
-				}
-				lastScrollTop = scrollTop;
 				});
 
 				document.addEventListener('DOMContentLoaded', cargarBotones);
