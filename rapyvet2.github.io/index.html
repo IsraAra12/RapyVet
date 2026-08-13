@@ -502,8 +502,9 @@
 						font-family: 'Poppins', sans-serif;
 						text-align: left;
 						isolation: isolate;
-						animation: cardReveal 0.6s cubic-bezier(.2,.75,.25,1) both;
-						animation-delay: var(--delay, 0ms);
+						opacity: 1;
+						transform: none;
+						animation: none;
 					}
 
 						.grid-laboratorios .btn-pdf::before {
@@ -528,7 +529,9 @@
 
 						.grid-laboratorios .btn-pdf:hover,
 						.grid-laboratorios .btn-pdf:focus-visible {
-						transform: translateY(-7px) scale(1.012);
+						transform: none;
+						translate: 0 -7px;
+						scale: 1.012;
 						outline: none;
 						box-shadow: var(--sombra-hover);
 						border-color: rgba(156, 84, 176, 0.52);
@@ -605,7 +608,6 @@
 						@keyframes gradientFlow { to { background-position: 250% center; } }
 						@keyframes bannerAurora { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
 						@keyframes bannerShine { 0%, 15% { transform: translateX(-180%) rotate(18deg); } 55%, 100% { transform: translateX(650%) rotate(18deg); } }
-						@keyframes cardReveal { from { opacity: 0; transform: translateY(22px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
 						@keyframes modalIn { from { opacity: 0; transform: scale(0.992); } to { opacity: 1; transform: scale(1); } }
 
 						@media (max-width: 760px) {
@@ -804,7 +806,6 @@
 					tarjeta.className = 'btn-pdf';
 					tarjeta.dataset.linea = cat.linea;
 					tarjeta.dataset.search = normalizarTexto(`${cat.nombre} ${cat.textoLinea}`);
-					tarjeta.style.setProperty('--delay', `${Math.min(index * 35, 420)}ms`);
 					tarjeta.setAttribute('aria-label', `Abrir lista de precios de ${cat.nombre}, línea ${cat.textoLinea}`);
 					tarjeta.addEventListener('click', () => {
 						ultimoFoco = tarjeta;
@@ -948,6 +949,84 @@
 				iniciarTema();
 				cargarBotones();
 			});
+			</script>
+
+			<script type="module">
+				import { animate, inView, stagger } from "https://cdn.jsdelivr.net/npm/motion@latest/+esm";
+
+				function iniciarAnimacionesDeEntrada() {
+					if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+					const curvaSuave = [0.22, 1, 0.36, 1];
+
+					function preparar(elementos) {
+						elementos.forEach((elemento) => {
+							elemento.style.opacity = '0';
+							elemento.style.willChange = 'opacity, transform';
+						});
+					}
+
+					function limpiar(elementos) {
+						elementos.forEach((elemento) => {
+							elemento.style.removeProperty('will-change');
+						});
+					}
+
+					function revelarGrupo(contenedor, elementos, opciones = {}) {
+						if (!contenedor || elementos.length === 0) return;
+						const distancia = opciones.distancia ?? 28;
+						preparar(elementos);
+
+						inView(contenedor, () => {
+							const animacion = animate(
+								elementos,
+								{ opacity: [0, 1], y: [distancia, 0], scale: [0.985, 1] },
+								{
+									duration: opciones.duracion ?? 0.72,
+									delay: elementos.length > 1 ? stagger(opciones.desfase ?? 0.09) : 0,
+									ease: curvaSuave
+								}
+							);
+							animacion.then(() => limpiar(elementos));
+						}, { amount: opciones.cantidad ?? 0.18, margin: '0px 0px -8% 0px' });
+					}
+
+					const header = document.querySelector('header');
+					preparar([header]);
+					const entradaHeader = animate(
+						header,
+						{ opacity: [0, 1], y: [-18, 0], scale: [0.99, 1] },
+						{ duration: 0.65, ease: curvaSuave }
+					);
+					entradaHeader.then(() => limpiar([header]));
+
+					const hero = document.querySelector('.hero');
+					revelarGrupo(hero, [...hero.children], { desfase: 0.11, distancia: 32, cantidad: 0.08 });
+					revelarGrupo(document.querySelector('.search-wrapper'), [document.querySelector('.search-wrapper')], { distancia: 22 });
+					revelarGrupo(document.querySelector('#banner-expandido'), [document.querySelector('#banner-expandido')], { distancia: 34 });
+					revelarGrupo(document.querySelector('.catalog-toolbar'), [document.querySelector('.catalog-heading'), document.querySelector('.filter-chips')], { desfase: 0.12 });
+
+					const tarjetas = [...document.querySelectorAll('#lista-botones .btn-pdf')];
+					preparar(tarjetas);
+					tarjetas.forEach((tarjeta, index) => {
+						inView(tarjeta, () => {
+							const animacion = animate(
+								tarjeta,
+								{ opacity: [0, 1], y: [24, 0], scale: [0.985, 1] },
+								{ duration: 0.58, delay: (index % 4) * 0.045, ease: curvaSuave }
+							);
+							animacion.then(() => limpiar([tarjeta]));
+						}, { amount: 0.15, margin: '0px 0px -6% 0px' });
+					});
+
+					revelarGrupo(document.querySelector('footer'), [document.querySelector('.contacto-info')], { distancia: 30, cantidad: 0.12 });
+				}
+
+				if (document.readyState !== 'complete') {
+					document.addEventListener('DOMContentLoaded', iniciarAnimacionesDeEntrada, { once: true });
+				} else {
+					iniciarAnimacionesDeEntrada();
+				}
 			</script>
 	</body>
 </html>
