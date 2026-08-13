@@ -3,7 +3,8 @@
 	<head>
 		<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
-				<title>Catálogos y Servicios | RapyVet</title>
+				<meta name="theme-color" content="#7b3e8c">
+				<title>Listas de Precios Veterinarios 2026 | RapyVet</title>
 
 				<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
@@ -258,16 +259,399 @@
 						justify-content: center;
 						}
 						}
+
+						/* --- EXPERIENCIA PREMIUM 2026 --- */
+						:root {
+						--morado-profundo: #4b1762;
+						--acento-fucsia: #d75cf4;
+						--acento-cian: #58d9ff;
+						--fondo-principal: #f6f4f8;
+						--fondo-tarjeta: rgba(255, 255, 255, 0.82);
+						--borde-input: rgba(74, 23, 98, 0.11);
+						--sombra-tarjeta: 0 12px 35px rgba(45, 20, 55, 0.07);
+						--sombra-hover: 0 24px 55px rgba(123, 62, 140, 0.2);
+						}
+
+						[data-theme="dark"] {
+						--fondo-principal: #0d0b10;
+						--fondo-tarjeta: rgba(29, 25, 32, 0.78);
+						--fondo-header: rgba(13, 11, 16, 0.72);
+						--borde-input: rgba(255, 255, 255, 0.09);
+						--texto-secundario: #aaa3af;
+						}
+
+						html { scroll-behavior: smooth; }
+
+						body {
+						position: relative;
+						isolation: isolate;
+						overflow-x: hidden;
+						background-image:
+						radial-gradient(circle at 8% 12%, rgba(156, 84, 176, 0.12), transparent 28%),
+						radial-gradient(circle at 92% 38%, rgba(88, 217, 255, 0.08), transparent 25%),
+						linear-gradient(180deg, var(--fondo-principal), var(--fondo-principal));
+					}
+
+						body::before {
+						content: "";
+						position: fixed;
+						inset: 0;
+						z-index: -1;
+						pointer-events: none;
+						opacity: 0.28;
+						background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");
+					}
+
+						header {
+						padding: 12px 24px;
+						border-bottom: 1px solid rgba(123, 62, 140, 0.25);
+						box-shadow: 0 10px 35px rgba(24, 12, 29, 0.06);
+					}
+
+						header::after {
+						content: "";
+						position: absolute;
+						left: 0;
+						bottom: -1px;
+						width: 100%;
+						height: 2px;
+						background: linear-gradient(90deg, transparent, var(--morado-rapyvet), var(--acento-fucsia), transparent);
+						}
+
+						header img { max-width: 152px; }
+
+						.theme-switch {
+						width: 44px;
+						height: 44px;
+						border-radius: 50%;
+						background: var(--fondo-tarjeta);
+						border: 1px solid var(--borde-input);
+						box-shadow: var(--sombra-tarjeta);
+					}
+
+						.container {
+						width: min(1220px, calc(100% - 40px));
+						margin: 0 auto;
+						padding: 0;
+					}
+
+						.hero {
+						position: relative;
+						text-align: center;
+						padding: 74px 20px 38px;
+					}
+
+						.hero h1 {
+						max-width: 850px;
+						margin: 0 auto 16px;
+						font-size: clamp(2.4rem, 6vw, 4.6rem);
+						line-height: 1.02;
+						letter-spacing: -0.055em;
+					}
+
+						.hero-highlight {
+						display: inline-block;
+						background: linear-gradient(110deg, var(--morado-rapyvet), var(--acento-fucsia), #ee8fc8, var(--morado-rapyvet));
+						background-size: 250% auto;
+						-webkit-background-clip: text;
+						background-clip: text;
+						color: transparent;
+						animation: gradientFlow 7s linear infinite;
+					}
+
+						p.instrucciones {
+						max-width: 680px;
+						margin: 0 auto 28px;
+						font-size: 1.05rem;
+						line-height: 1.7;
+					}
+
+						.trust-row {
+						display: inline-flex;
+						align-items: stretch;
+						justify-content: center;
+						border: 1px solid var(--borde-input);
+						border-radius: 18px;
+						background: var(--fondo-tarjeta);
+						box-shadow: var(--sombra-tarjeta);
+						backdrop-filter: blur(16px);
+						overflow: hidden;
+					}
+
+						.trust-item {
+						min-width: 190px;
+						padding: 14px 22px;
+						display: flex;
+						flex-direction: column;
+						gap: 2px;
+					}
+
+						.trust-item + .trust-item { border-left: 1px solid var(--borde-input); }
+						.trust-item strong { color: var(--texto-principal); font-size: 1rem; }
+						.trust-item span { color: var(--texto-secundario); font-size: 0.72rem; }
+
+						.search-wrapper {
+						max-width: 760px;
+						margin: 4px auto 26px;
+						}
+
+						#buscador {
+						height: 62px;
+						padding: 0 58px;
+						border: 1px solid var(--borde-input);
+						background: var(--fondo-tarjeta);
+						backdrop-filter: blur(18px);
+						box-shadow: 0 15px 45px rgba(61, 25, 72, 0.1), inset 0 1px rgba(255,255,255,0.12);
+					}
+
+						#buscador:focus {
+						border-color: rgba(215, 92, 244, 0.65);
+						box-shadow: 0 18px 55px rgba(123, 62, 140, 0.2), 0 0 0 5px rgba(156, 84, 176, 0.1);
+						}
+
+						#buscador::-webkit-search-cancel-button { display: none; }
+
+						.search-icon { left: 23px; }
+
+						.clear-search {
+						position: absolute;
+						right: 14px;
+						top: 50%;
+						transform: translateY(-50%) scale(0.85);
+						width: 36px;
+						height: 36px;
+						border: 0;
+						border-radius: 50%;
+						background: rgba(123, 62, 140, 0.1);
+						color: var(--texto-principal);
+						font-size: 17px;
+						cursor: pointer;
+						opacity: 0;
+						pointer-events: none;
+						transition: 0.25s ease;
+					}
+
+						.clear-search.visible { opacity: 1; pointer-events: auto; transform: translateY(-50%) scale(1); }
+						.clear-search:hover { background: rgba(123, 62, 140, 0.2); }
+
+						.catalog-toolbar {
+						display: flex;
+						align-items: flex-end;
+						justify-content: space-between;
+						gap: 22px;
+						margin: 42px 0 20px;
+					}
+
+						.catalog-heading h2 { margin: 0 0 5px; font-size: 1.6rem; letter-spacing: -0.035em; }
+						.catalog-heading p { margin: 0; color: var(--texto-secundario); font-size: 0.9rem; }
+
+						.filter-chips { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+
+						.filter-chip {
+						border: 1px solid var(--borde-input);
+						border-radius: 999px;
+						padding: 9px 14px;
+						background: var(--fondo-tarjeta);
+						color: var(--texto-secundario);
+						font: 600 0.78rem 'Poppins', sans-serif;
+						cursor: pointer;
+						transition: transform 0.22s ease, background 0.22s ease, color 0.22s ease, border-color 0.22s ease;
+					}
+
+						.filter-chip:hover { transform: translateY(-2px); border-color: rgba(123, 62, 140, 0.38); color: var(--texto-principal); }
+						.filter-chip.active { background: linear-gradient(135deg, var(--morado-rapyvet), #9c4fba); border-color: transparent; color: white; box-shadow: 0 8px 22px rgba(123, 62, 140, 0.24); }
+
+						.banner-wrapper { margin: 36px 0 30px; }
+
+						.banner-servicio {
+						padding: 32px 42px;
+						border: 1px solid rgba(255,255,255,0.16);
+						background: linear-gradient(120deg, #4b1762, #7b3e8c, #a349a4, #5b2574);
+						background-size: 260% 260%;
+						box-shadow: 0 20px 55px rgba(75, 23, 98, 0.3);
+						animation: bannerAurora 12s ease infinite;
+						overflow: hidden;
+					}
+
+						.banner-servicio::before {
+						content: "";
+						position: absolute;
+						inset: -80% auto -80% -15%;
+						width: 28%;
+						transform: rotate(18deg);
+						background: linear-gradient(90deg, transparent, rgba(255,255,255,0.14), transparent);
+						animation: bannerShine 6s ease-in-out infinite;
+					}
+
+						.banner-copy { position: relative; z-index: 1; }
+						.banner-kicker { display: block; margin-bottom: 6px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.75; }
+						.banner-servicio .icono-servicio { position: relative; z-index: 1; filter: drop-shadow(0 12px 16px rgba(0,0,0,0.2)); }
+
+						.grid-laboratorios {
+						grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+						gap: 18px;
+						}
+
+						.grid-laboratorios .btn-pdf {
+						min-height: 94px;
+						width: 100%;
+						box-sizing: border-box;
+						padding: 15px 16px;
+						background: var(--fondo-tarjeta);
+						backdrop-filter: blur(16px);
+						font-family: 'Poppins', sans-serif;
+						text-align: left;
+						isolation: isolate;
+						animation: cardReveal 0.6s cubic-bezier(.2,.75,.25,1) both;
+						animation-delay: var(--delay, 0ms);
+					}
+
+						.grid-laboratorios .btn-pdf::before {
+						content: "";
+						position: absolute;
+						inset: 0 auto 0 0;
+						width: 3px;
+						background: linear-gradient(180deg, var(--acento-fucsia), var(--morado-rapyvet));
+						opacity: 0;
+						transition: opacity 0.3s ease;
+					}
+
+						.grid-laboratorios .btn-pdf::after {
+						content: "";
+						position: absolute;
+						inset: 0;
+						z-index: -1;
+						background: radial-gradient(circle at 15% 0%, rgba(215, 92, 244, 0.12), transparent 45%);
+						opacity: 0;
+						transition: opacity 0.35s ease;
+					}
+
+						.grid-laboratorios .btn-pdf:hover,
+						.grid-laboratorios .btn-pdf:focus-visible {
+						transform: translateY(-7px) scale(1.012);
+						outline: none;
+						box-shadow: var(--sombra-hover);
+						border-color: rgba(156, 84, 176, 0.52);
+					}
+
+						.grid-laboratorios .btn-pdf:hover::before,
+						.grid-laboratorios .btn-pdf:hover::after,
+						.grid-laboratorios .btn-pdf:focus-visible::before,
+						.grid-laboratorios .btn-pdf:focus-visible::after { opacity: 1; }
+
+						.logo-shell {
+						width: 62px;
+						height: 62px;
+						margin-right: 16px;
+						border-radius: 15px;
+						background: rgba(255,255,255,0.96);
+						display: grid;
+						place-items: center;
+						box-shadow: inset 0 0 0 1px rgba(25,15,29,0.06), 0 7px 18px rgba(0,0,0,0.06);
+						flex: 0 0 auto;
+						transition: transform 0.35s cubic-bezier(.2,.8,.2,1);
+					}
+
+						.logo-lab { width: 50px; height: 50px; padding: 0; margin: 0; border-radius: 9px; }
+						[data-theme="dark"] .logo-lab { background: transparent; }
+						.grid-laboratorios .btn-pdf:hover .logo-shell { transform: rotate(-3deg) scale(1.06); }
+						.nombre-lab { font-size: 1.05rem; letter-spacing: -0.02em; }
+
+						.card-action {
+						margin-left: auto;
+						width: 31px;
+						height: 31px;
+						display: grid;
+						place-items: center;
+						border-radius: 50%;
+						background: rgba(123, 62, 140, 0.08);
+						color: var(--morado-claro);
+						font-size: 1rem;
+						transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+					}
+
+						.grid-laboratorios .btn-pdf:hover .card-action { transform: rotate(45deg); background: var(--morado-rapyvet); color: white; }
+						.grid-laboratorios .btn-pdf[hidden] { display: none !important; }
+
+						.tag { padding: 5px 10px; font-size: 0.66rem; }
+						.tag.gral { background: rgba(142, 36, 170, 0.12); color: #9c36b9; }
+						[data-theme="dark"] .tag.gral { background: rgba(206, 147, 216, 0.12); }
+
+						#sin-resultados { margin-top: 20px; border-radius: 20px; }
+
+						.pdf-modal-header { padding: 12px 22px; backdrop-filter: blur(16px); }
+						.pdf-modal.abierto { animation: modalIn 0.28s ease both; }
+						.btn-cerrar, #btn-externo-pdf { transition: transform 0.22s ease, filter 0.22s ease; }
+						.btn-cerrar:hover, #btn-externo-pdf:hover { transform: translateY(-2px); filter: brightness(1.08); }
+
+						footer {
+						position: relative;
+						margin-top: 90px;
+						background: linear-gradient(180deg, var(--fondo-tarjeta), rgba(123,62,140,0.05));
+						overflow: hidden;
+					}
+
+						footer::before {
+						content: "";
+						position: absolute;
+						top: 0;
+						left: 50%;
+						width: min(700px, 80%);
+						height: 1px;
+						transform: translateX(-50%);
+						background: linear-gradient(90deg, transparent, var(--acento-fucsia), transparent);
+					}
+
+						@keyframes gradientFlow { to { background-position: 250% center; } }
+						@keyframes bannerAurora { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+						@keyframes bannerShine { 0%, 15% { transform: translateX(-180%) rotate(18deg); } 55%, 100% { transform: translateX(650%) rotate(18deg); } }
+						@keyframes cardReveal { from { opacity: 0; transform: translateY(22px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+						@keyframes modalIn { from { opacity: 0; transform: scale(0.992); } to { opacity: 1; transform: scale(1); } }
+
+						@media (max-width: 760px) {
+						.container { width: min(100% - 28px, 1220px); }
+						.hero { padding: 52px 6px 30px; }
+						.hero h1 { font-size: clamp(2.25rem, 12vw, 3.25rem); }
+						.trust-row { width: 100%; }
+						.trust-item { min-width: 0; flex: 1; padding: 12px 8px; }
+						.catalog-toolbar { align-items: flex-start; flex-direction: column; margin-top: 34px; }
+						.filter-chips { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); width: 100%; padding: 2px 0; }
+						.filter-chip { min-height: 42px; padding-inline: 9px; }
+						.banner-servicio { padding: 34px 26px; }
+						.grid-laboratorios { grid-template-columns: 1fr; gap: 13px; }
+						.grid-laboratorios .btn-pdf { min-height: 88px; }
+						.card-action { margin-left: auto; }
+						}
+
+						@media (max-width: 420px) {
+						header { padding: 10px 14px; }
+						header img { max-width: 126px; }
+						.hero { padding-top: 42px; }
+						#buscador { height: 56px; padding-left: 48px; padding-right: 48px; font-size: 0.85rem; }
+						.search-icon { left: 17px; }
+						.logo-shell { width: 56px; height: 56px; }
+						.logo-lab { width: 46px; height: 46px; }
+						.card-action { width: 28px; height: 28px; }
+						}
+
+						@media (prefers-reduced-motion: reduce) {
+						*, *::before, *::after {
+						animation-duration: 0.01ms !important;
+						animation-iteration-count: 1 !important;
+						scroll-behavior: auto !important;
+						transition-duration: 0.01ms !important;
+						}
+						}
 					</style>
 				</head>
 	<body>
 
-		<div class="pdf-modal" id="visor-pdf">
+		<div class="pdf-modal" id="visor-pdf" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="titulo-laboratorio">
 			<div class="pdf-modal-header">
 				<img src="logo_rapyvet.png" alt="Logo RapyVet Mini">
 					<span class="pdf-modal-titulo" id="titulo-laboratorio">Cargando catálogo...</span>
 					<div style="display: flex; gap: 10px;">
-						<a id="btn-externo-pdf" href="#" target="_blank" style="background-color: var(--morado-rapyvet); color: white; border: none; padding: 8px 15px; font-size: 0.9em; font-weight: 600; font-family: 'Poppins', sans-serif; border-radius: 8px; text-decoration: none; display: flex; align-items: center;">Abrir externo</a>
+						<a id="btn-externo-pdf" href="#" target="_blank" rel="noopener" style="background-color: var(--morado-rapyvet); color: white; border: none; padding: 8px 15px; font-size: 0.9em; font-weight: 600; font-family: 'Poppins', sans-serif; border-radius: 8px; text-decoration: none; display: flex; align-items: center;">Abrir externo</a>
 						<button class="btn-cerrar" onclick="cerrarVisor()">✖ Cerrar</button>
 					</div>
 				</div>
@@ -277,24 +661,32 @@
 		<header>
 			<div class="header-vacio"></div>
 			<img src="logo_rapyvet.png" alt="Logo RapyVet">
-				<button class="theme-switch" id="theme-toggle" title="Cambiar a Modo Oscuro">🌙</button>
+				<button class="theme-switch" id="theme-toggle" title="Cambiar tema" aria-label="Cambiar a modo oscuro">🌙</button>
 			</header>
 
 		<div class="container">
-			<h1>Precios 2026</h1>
-			<p class="instrucciones">Encuentra y descarga las listas de precios actualizadas.</p>
+			<section class="hero" aria-labelledby="titulo-principal">
+				<h1 id="titulo-principal">Distribución veterinaria.<br><span class="hero-highlight">Precios por laboratorio.</span></h1>
+				<p class="instrucciones">Consulta las listas de precios de las marcas que distribuimos, organizadas para profesionales y negocios veterinarios.</p>
+				<div class="trust-row" aria-label="Ventajas de la biblioteca">
+					<div class="trust-item"><strong id="catalog-count">29</strong><span>catálogos disponibles</span></div>
+					<div class="trust-item"><strong>2026</strong><span>listas vigentes</span></div>
+				</div>
+			</section>
 
 			<div class="search-wrapper">
-				<input type="text" id="buscador" onkeyup="filtrarLabs()" placeholder="Buscar laboratorio o línea (ej. 'Biozoo' o 'Producción')...">
+				<input type="search" id="buscador" autocomplete="off" aria-label="Buscar laboratorio o línea" placeholder="Busca por laboratorio o línea...">
 					<span class="search-icon">🔍</span>
+					<button type="button" class="clear-search" id="limpiar-busqueda" aria-label="Limpiar búsqueda">✕</button>
 				</div>
 
 			<!-- Banner Principal Expandido -->
 			<div class="banner-wrapper" id="banner-expandido">
 				<div class="banner-servicio">
-					<button class="btn-cerrar-banner" onclick="contraerBanner()" title="Ocultar anuncio">✖</button>
+					<button class="btn-cerrar-banner" onclick="contraerBanner()" title="Ocultar anuncio" aria-label="Ocultar anuncio de afilado">✖</button>
 					<div class="icono-servicio">✂️</div>
-					<div>
+					<div class="banner-copy">
+						<span class="banner-kicker">Servicio especializado RapyVet</span>
 						<h2>¿Tus herramientas ya no cortan igual?</h2>
 						<p>
 							En RapyVet también ofrecemos el servicio profesional de <strong>afilado de tijeras y cuchillas</strong> para estéticas veterinarias y Pet Grooming. ¡Déjalas como nuevas!
@@ -305,16 +697,29 @@
 
 			<!-- Tarjeta de Afilado Contraída (aparece oculta por defecto) -->
 			<div id="banner-contraido" style="display: none;">
-				<div class="btn-pdf tarjeta-afilado-mini" onclick="expandirBanner()">
+				<button type="button" class="btn-pdf tarjeta-afilado-mini" onclick="expandirBanner()">
 					<div class="icono-mini">✂️</div>
 					<div class="info-lab">
 						<span class="nombre-lab" style="margin-bottom: 0;">Servicio de Afilado</span>
 						<span style="font-size: 0.85em; opacity: 0.9; font-weight: 500;">Toca para expandir info</span>
 					</div>
+				</button>
+			</div>
+
+			<div class="catalog-toolbar">
+				<div class="catalog-heading">
+					<h2>Laboratorios disponibles</h2>
+					<p id="contador-resultados" aria-live="polite">29 catálogos listos para consultar</p>
+				</div>
+				<div class="filter-chips" aria-label="Filtrar catálogos por línea">
+					<button type="button" class="filter-chip active" data-filter="all" aria-pressed="true">Todos</button>
+					<button type="button" class="filter-chip" data-filter="gral" aria-pressed="false">General</button>
+					<button type="button" class="filter-chip" data-filter="ac" aria-pressed="false">Animales de compañía</button>
+					<button type="button" class="filter-chip" data-filter="ap" aria-pressed="false">Producción</button>
 				</div>
 			</div>
 
-			<div id="sin-resultados">
+			<div id="sin-resultados" role="status">
 				<p>😕 No encontramos ningún catálogo que coincida con tu búsqueda.</p>
 			</div>
 
@@ -370,6 +775,7 @@
 			{ archivo: "Mederilab PP 2025 Nov.pdf", nombre: "Mederilab", linea: "gral", textoLinea: "General", imagen: "logos_lab/mederilab.png" },
 			{ archivo: "Precios MSD 2026.pdf", nombre: "MSD", linea: "gral", textoLinea: "General", imagen: "logos_lab/MSD.png" },
 			{ archivo: "MUNVET PRECIOS AD 2025 RAPYVET.pdf", nombre: "Munvet", linea: "gral", textoLinea: "General", imagen: "logos_lab/munvet.png" },
+			{ archivo: "Nartex Labs PP 2026.pdf", nombre: "Nartex Labs", linea: "gral", textoLinea: "General", imagen: "logos_lab/nartex.png" },
 			{ archivo: "L.P. PETS PHARMA 2026.pdf", nombre: "Pets Pharma", linea: "gral", textoLinea: "General", imagen: "logos_lab/pets.png" },
 			{ archivo: "Pisa Anco Feb 2026 PP PFarmacia.pdf", nombre: "Pisa", linea: "gral", textoLinea: "General", imagen: "logos_lab/pisa.png" },
 			{ archivo: "Santgar PP Pmvz Marzo 2026.pdf", nombre: "Santgar", linea: "gral", textoLinea: "General", imagen: "logos_lab/Santgar.png" },
@@ -381,114 +787,167 @@
 			{ archivo: "ZURICH 2026.pdf", nombre: "Zurichvet", linea: "gral", textoLinea: "General", imagen: "logos_lab/ZurichVet.png" }
 			];
 
+			let filtroActivo = 'all';
+			let ultimoFoco = null;
+
+			function normalizarTexto(texto) {
+				return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+			}
+
 			function cargarBotones() {
-			const contenedor = document.getElementById('lista-botones');
-			contenedor.innerHTML = '';
+				const contenedor = document.getElementById('lista-botones');
+				contenedor.innerHTML = '';
 
-			catalogos.forEach((cat, index) => {
-			const tarjeta = document.createElement('div');
-			tarjeta.className = "btn-pdf";
-			tarjeta.style.animation = `slideUpFade 0.5s ease forwards ${index * 0.05}s`;
+				catalogos.forEach((cat, index) => {
+					const tarjeta = document.createElement('button');
+					tarjeta.type = 'button';
+					tarjeta.className = 'btn-pdf';
+					tarjeta.dataset.linea = cat.linea;
+					tarjeta.dataset.search = normalizarTexto(`${cat.nombre} ${cat.textoLinea}`);
+					tarjeta.style.setProperty('--delay', `${Math.min(index * 35, 420)}ms`);
+					tarjeta.setAttribute('aria-label', `Abrir lista de precios de ${cat.nombre}, línea ${cat.textoLinea}`);
+					tarjeta.addEventListener('click', () => {
+						ultimoFoco = tarjeta;
+						abrirVisor(`listas_pdf/${cat.archivo}`, cat.nombre, cat.textoLinea);
+					});
 
-			tarjeta.onclick = function() {
-			abrirVisor(`listas_pdf/${cat.archivo}`, cat.nombre, cat.textoLinea);
-			};
+					tarjeta.innerHTML = `
+						<span class="logo-shell"><img src="${cat.imagen}" class="logo-lab" alt="" loading="lazy"></span>
+						<span class="info-lab">
+							<span class="nombre-lab">${cat.nombre}</span>
+							<span class="tag ${cat.linea}">${cat.textoLinea}</span>
+						</span>
+						<span class="card-action" aria-hidden="true">↗</span>
+					`;
 
-			tarjeta.innerHTML = `
-			<img src="${cat.imagen}" class="logo-lab" alt="Logo ${cat.nombre}">
-				<div class="info-lab">
-					<span class="nombre-lab">${cat.nombre}</span>
-					<span class="tag ${cat.linea}">${cat.textoLinea}</span>
-				</div>
-				`;
-
-				contenedor.appendChild(tarjeta);
+					contenedor.appendChild(tarjeta);
 				});
-				}
 
-				/* --- FUNCIONES DEL BANNER --- */
-				function contraerBanner() {
+				document.getElementById('catalog-count').textContent = catalogos.length;
+				aplicarFiltros();
+			}
+
+			function aplicarFiltros() {
+				const consulta = normalizarTexto(document.getElementById('buscador').value);
+				const tarjetas = document.querySelectorAll('#lista-botones .btn-pdf');
+				let visibles = 0;
+
+				tarjetas.forEach((tarjeta) => {
+					const coincideTexto = tarjeta.dataset.search.includes(consulta);
+					const coincideLinea = filtroActivo === 'all' || tarjeta.dataset.linea === filtroActivo;
+					const mostrar = coincideTexto && coincideLinea;
+					tarjeta.hidden = !mostrar;
+					if (mostrar) visibles++;
+				});
+
+				const etiqueta = visibles === 1 ? 'catálogo listo para consultar' : 'catálogos listos para consultar';
+				document.getElementById('contador-resultados').textContent = `${visibles} ${etiqueta}`;
+				document.getElementById('sin-resultados').style.display = visibles === 0 ? 'block' : 'none';
+				document.getElementById('limpiar-busqueda').classList.toggle('visible', consulta.length > 0);
+			}
+
+			function filtrarLabs() {
+				aplicarFiltros();
+			}
+
+			function contraerBanner() {
 				document.getElementById('banner-expandido').style.display = 'none';
 				document.getElementById('banner-contraido').style.display = 'block';
-				}
+			}
 
-				function expandirBanner() {
+			function expandirBanner() {
 				document.getElementById('banner-contraido').style.display = 'none';
 				document.getElementById('banner-expandido').style.display = 'block';
-				}
+			}
 
-				/* --- SOLUCIÓN DE PDFs PARA MÓVILES --- */
-				function esMovil() {
+			function esMovil() {
 				return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
-				}
+			}
 
-				function abrirVisor(rutaPdf, nombreLab, lineaLab) {
+			function abrirVisor(rutaPdf, nombreLab, lineaLab) {
 				const rutaSegura = encodeURI(rutaPdf);
 
 				if (esMovil()) {
-				window.open(rutaSegura, '_blank');
-				} else {
+					window.open(rutaSegura, '_blank', 'noopener');
+					return;
+				}
+
 				const modal = document.getElementById('visor-pdf');
-				const iframe = document.getElementById('frame-pdf');
-				const titulo = document.getElementById('titulo-laboratorio');
-				const btnExterno = document.getElementById('btn-externo-pdf');
-
-				titulo.innerText = `${nombreLab} - Línea ${lineaLab}`;
-				iframe.src = rutaSegura;
-				btnExterno.href = rutaSegura;
-
+				document.getElementById('titulo-laboratorio').innerText = `${nombreLab} - Línea ${lineaLab}`;
+				document.getElementById('frame-pdf').src = rutaSegura;
+				document.getElementById('btn-externo-pdf').href = rutaSegura;
 				modal.style.display = 'flex';
+				modal.classList.add('abierto');
+				modal.setAttribute('aria-hidden', 'false');
 				document.body.style.overflow = 'hidden';
-				}
-				}
+				modal.querySelector('.btn-cerrar').focus();
+			}
 
-				function cerrarVisor() {
+			function cerrarVisor() {
 				const modal = document.getElementById('visor-pdf');
-				const iframe = document.getElementById('frame-pdf');
-
 				modal.style.display = 'none';
+				modal.classList.remove('abierto');
+				modal.setAttribute('aria-hidden', 'true');
 				document.body.style.overflow = 'auto';
-				iframe.src = '';
-				}
+				document.getElementById('frame-pdf').src = '';
+				if (ultimoFoco) ultimoFoco.focus();
+			}
 
-				function filtrarLabs() {
-				let input = document.getElementById('buscador').value.toLowerCase();
-				let botones = document.querySelectorAll('.btn-pdf');
-				let visibles = 0;
-
-				// Filtra solo los catálogos, ignorando la tarjeta mini del banner
-				botones.forEach(function(boton) {
-				if (!boton.classList.contains('tarjeta-afilado-mini')) {
-				let textoBoton = boton.textContent.toLowerCase();
-				if (textoBoton.includes(input)) {
-				boton.style.display = "flex";
-				visibles++;
-				} else {
-				boton.style.display = "none";
-				}
-				}
-				});
-
-				document.getElementById('sin-resultados').style.display = (visibles === 0) ? 'block' : 'none';
-				}
-
+			function actualizarControlTema(esOscuro) {
 				const themeToggle = document.getElementById('theme-toggle');
-				if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-				document.body.setAttribute('data-theme', 'dark');
-				themeToggle.textContent = '☀️';
-				}
+				themeToggle.textContent = esOscuro ? '☀️' : '🌙';
+				themeToggle.setAttribute('aria-label', esOscuro ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro');
+				document.querySelector('meta[name="theme-color"]').content = esOscuro ? '#0d0b10' : '#7b3e8c';
+			}
 
-				themeToggle.addEventListener('click', () => {
-				if (document.body.getAttribute('data-theme') === 'dark') {
-				document.body.removeAttribute('data-theme');
-				themeToggle.textContent = '🌙';
-				} else {
-				document.body.setAttribute('data-theme', 'dark');
-				themeToggle.textContent = '☀️';
-				}
+			function iniciarTema() {
+				let temaGuardado = null;
+				try { temaGuardado = localStorage.getItem('rapyvet-theme'); } catch (error) { /* almacenamiento no disponible */ }
+				const esOscuro = temaGuardado ? temaGuardado === 'dark' : window.matchMedia?.('(prefers-color-scheme: dark)').matches;
+				if (esOscuro) document.body.setAttribute('data-theme', 'dark');
+				actualizarControlTema(esOscuro);
+			}
+
+			document.getElementById('theme-toggle').addEventListener('click', () => {
+				const esOscuro = document.body.getAttribute('data-theme') !== 'dark';
+				document.body.toggleAttribute('data-theme', esOscuro);
+				if (esOscuro) document.body.setAttribute('data-theme', 'dark');
+				try { localStorage.setItem('rapyvet-theme', esOscuro ? 'dark' : 'light'); } catch (error) { /* almacenamiento no disponible */ }
+				actualizarControlTema(esOscuro);
+			});
+
+			document.getElementById('buscador').addEventListener('input', aplicarFiltros);
+			document.getElementById('limpiar-busqueda').addEventListener('click', () => {
+				const buscador = document.getElementById('buscador');
+				buscador.value = '';
+				buscador.focus();
+				aplicarFiltros();
+			});
+
+			document.querySelectorAll('.filter-chip').forEach((chip) => {
+				chip.addEventListener('click', () => {
+					filtroActivo = chip.dataset.filter;
+					document.querySelectorAll('.filter-chip').forEach((item) => {
+						const seleccionado = item === chip;
+						item.classList.toggle('active', seleccionado);
+						item.setAttribute('aria-pressed', seleccionado.toString());
+					});
+					aplicarFiltros();
 				});
+			});
 
-				document.addEventListener('DOMContentLoaded', cargarBotones);
+			document.addEventListener('keydown', (event) => {
+				if (event.key === 'Escape' && document.getElementById('visor-pdf').style.display === 'flex') cerrarVisor();
+				if (event.key === '/' && document.activeElement.tagName !== 'INPUT') {
+					event.preventDefault();
+					document.getElementById('buscador').focus();
+				}
+			});
+
+			document.addEventListener('DOMContentLoaded', () => {
+				iniciarTema();
+				cargarBotones();
+			});
 			</script>
 	</body>
 </html>
