@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 	<head>
 		<meta charset="UTF-8">
@@ -671,7 +671,7 @@
 				<h1 id="titulo-principal">Distribución veterinaria.<br><span class="hero-highlight">Precios por laboratorio.</span></h1>
 				<p class="instrucciones">Consulta las listas de precios de las marcas que distribuimos, organizadas para profesionales y negocios veterinarios.</p>
 				<div class="trust-row" aria-label="Ventajas de la biblioteca">
-					<div class="trust-item"><strong id="catalog-count">29</strong><span>catálogos disponibles</span></div>
+					<div class="trust-item"><strong id="catalog-count">31</strong><span>catálogos disponibles</span></div>
 					<div class="trust-item"><strong>2026</strong><span>listas vigentes</span></div>
 				</div>
 			</section>
@@ -711,7 +711,7 @@
 			<div class="catalog-toolbar">
 				<div class="catalog-heading">
 					<h2>Laboratorios disponibles</h2>
-					<p id="contador-resultados" aria-live="polite">29 catálogos listos para consultar</p>
+					<p id="contador-resultados" aria-live="polite">31 catálogos listos para consultar</p>
 				</div>
 				<div class="filter-chips" aria-label="Filtrar catálogos por línea">
 					<button type="button" class="filter-chip active" data-filter="all" aria-pressed="true">Todos</button>
@@ -775,11 +775,13 @@
 			{ archivo: "Labyes PP Pmvz 2026.pdf", nombre: "Labyes", linea: "gral", textoLinea: "General", imagen: "logos_lab/labyes.png" },
 			{ archivo: "Lapisa AC 2026 MVZ-FEB.pdf", nombre: "Lapisa", linea: "ac", textoLinea: "Animales de Compañía", imagen: "logos_lab/lapisa.png" },
 			{ archivo: "Mederilab PP 2025 Nov.pdf", nombre: "Mederilab", linea: "gral", textoLinea: "General", imagen: "logos_lab/mederilab.png" },
+			{ archivo: "Milch PP 2026.pdf", nombre: "Milch", linea: "ac", textoLinea: "Animales de Compañía", imagen: "logos_lab/milch.png", alias: "leche sustituto gatitos cachorros nutricion" },
 			{ archivo: "Precios MSD 2026.pdf", nombre: "MSD", linea: "gral", textoLinea: "General", imagen: "logos_lab/MSD.png" },
 			{ archivo: "MUNVET PRECIOS AD 2025 RAPYVET.pdf", nombre: "Munvet", linea: "gral", textoLinea: "General", imagen: "logos_lab/munvet.png" },
 			{ archivo: "Nartex Labs PP 2026.pdf", nombre: "Nartex Labs", linea: "gral", textoLinea: "General", imagen: "logos_lab/nartex.png" },
 			{ archivo: "L.P. PETS PHARMA 2026.pdf", nombre: "Pets Pharma", linea: "gral", textoLinea: "General", imagen: "logos_lab/pets.png" },
 			{ archivo: "Pisa Anco Feb 2026 PP PFarmacia.pdf", nombre: "Pisa", linea: "gral", textoLinea: "General", imagen: "logos_lab/pisa.png" },
+			{ archivo: "Rade PP 2026.pdf", nombre: "Rade", linea: "ac", textoLinea: "Animales de Compañía", imagen: "logos_lab/rade.png", alias: "paw'e-rade cat-o'rade electrolitos hidratacion" },
 			{ archivo: "Santgar PP Pmvz Marzo 2026.pdf", nombre: "Santgar", linea: "gral", textoLinea: "General", imagen: "logos_lab/Santgar.png" },
 			{ archivo: "L.P. TORNEL 2025.pdf", nombre: "Tornel", linea: "gral", textoLinea: "General", imagen: "logos_lab/tornel.png" },
 			{ archivo: "Vetoquinol AC Feb 2026 PP Pmvz.pdf", nombre: "Vetoquinol", linea: "ac", textoLinea: "Animales de Compañía", imagen: "logos_lab/veto.png" },
@@ -805,7 +807,7 @@
 					tarjeta.type = 'button';
 					tarjeta.className = 'btn-pdf';
 					tarjeta.dataset.linea = cat.linea;
-					tarjeta.dataset.search = normalizarTexto(`${cat.nombre} ${cat.textoLinea}`);
+					tarjeta.dataset.search = normalizarTexto(`${cat.nombre} ${cat.textoLinea} ${cat.alias || ''}`);
 					tarjeta.setAttribute('aria-label', `Abrir lista de precios de ${cat.nombre}, línea ${cat.textoLinea}`);
 					tarjeta.addEventListener('click', () => {
 						ultimoFoco = tarjeta;
